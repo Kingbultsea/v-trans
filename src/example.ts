@@ -5,6 +5,51 @@ import mixinsLink from '../../mixins/link';
 const prefixCls = 'ivu-btn';
 
 export default {
+    props: {
+        type: {
+            validator (value) {
+                return oneOf(value, ['default', 'primary', 'dashed', 'text', 'info', 'success', 'warning', 'error']);
+            },
+            default: 'default'
+        },
+        shape: {
+            validator (value) {
+                return oneOf(value, ['circle', 'circle-outline']);
+            }
+        },
+        size: {
+            validator (value) {
+                return oneOf(value, ['small', 'large', 'default']);
+            },
+            default () {
+                return !this.$IVIEW || this.$IVIEW.size === '' ? 'default' : this.$IVIEW.size;
+            }
+        },
+        loading: Boolean,
+        disabled: Boolean,
+        htmlType: {
+            default: 'button',
+            validator (value) {
+                return oneOf(value, ['button', 'submit', 'reset']);
+            }
+        },
+        icon: {
+            type: String,
+            default: ''
+        },
+        customIcon: {
+            type: String,
+            default: ''
+        },
+        long: {
+            type: Boolean,
+            default: false
+        },
+        ghost: {
+            type: Boolean,
+            default: false
+        }
+    },
     data () {
       return {
         a: 1,

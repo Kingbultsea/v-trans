@@ -3,3 +3,4 @@ export * from './dataParser';
 export * from './methodsParser';
 export * from './propsParser';
 export * from './watchParser';
+export * from './propsParser'

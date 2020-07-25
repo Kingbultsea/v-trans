@@ -6,4 +6,5 @@ import { ConstructorTree } from '../global'
 // const B = types.builders
 
 export function propsParser(dataAST: any, constructorTree: ConstructorTree) {
+    constructorTree.propsStatment = dataAST
 }

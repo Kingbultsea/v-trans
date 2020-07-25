@@ -5,6 +5,7 @@ import {
     methodsParser,
     computeParser,
     watchParser,
+    propsParser
 } from './OPTIONS'
 import { source } from './example'
 // import { propsParser } from './OPTIONS/propsParser'
@@ -21,16 +22,19 @@ export default function loader() {
     const properties = vueControler.declaration.properties
     const mapProperties = findProperties(properties)
     const constructorTree = {
+        propsStatment: null as any,
         bodyString: [] as string[],
         setupBody: [] as any[],
         relativeStatement: new Map(),
         importStringArray: new Set() as Set<string>
     }
 
+    // options
     dataParser(mapProperties.get('data'), constructorTree)
     methodsParser(mapProperties.get('methods'), constructorTree)
     computeParser(mapProperties.get('computed'), constructorTree)
     watchParser(mapProperties.get('watch'), constructorTree)
+    propsParser(mapProperties.get('props'), constructorTree)
 
     // 暴力替换法，目前还不知道如何结合types的nodePath.replcase来达到更换。
     const cp = recast.parse(source)
@@ -52,7 +56,8 @@ export default function loader() {
                 value: B.functionExpression(B.identifier(''), [], B.blockStatement(constructorTree.setupBody)),
                 kind: 'init',
                 type: 'ObjectProperty'
-            }
+            },
+            constructorTree.propsStatment
             ]
         ))
     ).code)
