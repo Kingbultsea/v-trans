@@ -22,6 +22,7 @@ export function findObject(ast: Array<any>, key: string): any {
 
 export const THISKEY = 'wjh_'
 export const METHODSKEY = THISKEY + 'METHODS'
+export const COMPONENT_NAME = 'COMPONENT'
 
 export function expressionStatement(iA: string, iB: string): namedTypes.ExpressionStatement {
     return B.expressionStatement(
@@ -31,4 +32,8 @@ export function expressionStatement(iA: string, iB: string): namedTypes.Expressi
             )
         )
     )
+}
+
+export function replaceThis(source: string): string {
+    return source.replace(/this/g, COMPONENT_NAME)
 }

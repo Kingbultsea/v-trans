@@ -59,6 +59,12 @@ export default {
     },
     methods: {
       a () {
+        this.a = 999
+        const build = this.a
+        const cb = () => {
+        }
+      },
+      b () {
       }
     },
     computed: {
