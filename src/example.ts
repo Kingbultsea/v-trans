@@ -60,8 +60,15 @@ export default {
     methods: {
       a () {
         this.a = 999
+        console.log(
+          this.b()
+        )
         const build = this.a
         const cb = () => {
+          this.c = 999
+        }
+        function asd() {
+          this.ff = 123
         }
       },
       b () {

@@ -13,7 +13,6 @@ const types = recast.types
 const B = types.builders
 
 export default function loader(source: string) {
-    source = source
     const astOrigin = recast.parse(source)
     const body = astOrigin.program.body
     const vueControler = find(body, 'ExportDefaultDeclaration')
@@ -70,8 +69,6 @@ export default function loader(source: string) {
                 )])
             )
         ).code
-
-    return
 
     console.log('转换前')
     console.log(source)
